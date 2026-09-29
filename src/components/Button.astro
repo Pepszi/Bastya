@@ -1,6 +1,11 @@
 ---
-interface Props {
-	variant?: 'primary' | 'secondary';
+import type { HTMLAttributes } from 'astro/types';
+
+type ButtonAttrs = Omit<HTMLAttributes<'button'>, 'type' | 'class'>;
+type AnchorAttrs = Omit<HTMLAttributes<'a'>, 'href' | 'class'>;
+
+interface Props extends ButtonAttrs, AnchorAttrs {
+	variant?: 'primary' | 'secondary-accent' | 'secondary-white';
 	href?: string;
 	type?: 'button' | 'submit' | 'reset';
 	class?: string;
@@ -11,14 +16,16 @@ const {
 	href,
 	type = 'button',
 	class: className = '',
+	...rest
 } = Astro.props;
 
 const base =
-	'inline-flex items-center justify-center rounded-[6px] px-4 py-2 text-[0.9375rem] font-medium transition-colors';
+	'inline-flex cursor-pointer items-center justify-center rounded-[6px] px-4 py-2 text-[0.9375rem] font-medium transition-colors';
 
 const variants = {
 	primary: 'bg-accent text-background hover:bg-accent/90',
-	secondary: 'border border-accent bg-transparent text-accent hover:bg-accent/10',
+	'secondary-accent': 'border border-accent bg-transparent text-accent hover:bg-accent/10',
+	'secondary-white': 'border border-background bg-transparent text-background hover:bg-background/10',
 } as const;
 
 const classes = [base, variants[variant], className].filter(Boolean).join(' ');
@@ -26,11 +33,11 @@ const classes = [base, variants[variant], className].filter(Boolean).join(' ');
 
 {
 	href ? (
-		<a href={href} class={classes}>
+		<a href={href} class={classes} {...rest}>
 			<slot />
 		</a>
 	) : (
-		<button type={type} class={classes}>
+		<button type={type} class={classes} {...rest}>
 			<slot />
 		</button>
 	)
