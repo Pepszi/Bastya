@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Navigation from '../components/Navigation.astro';
 
 interface Props {
 	title?: string;
@@ -9,16 +10,25 @@ const { title = 'Astro' } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="hu">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/png" href="/global/favicon.png" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+			rel="stylesheet"
+		/>
 		<title>{title}</title>
+		<slot name="head" />
 	</head>
-	<body>
-		<slot />
+	<body class="bg-background text-primary font-sans">
+		<Navigation />
+		<main>
+			<slot />
+		</main>
 	</body>
 </html>

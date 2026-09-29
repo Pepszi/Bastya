@@ -1,0 +1,89 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/Button.astro';
+import Navigation from '../../components/Navigation.astro';
+
+const catalog = [
+	{ id: 'button', label: 'Button' },
+	{ id: 'navigation', label: 'Navigation' },
+];
+---
+
+<Layout title="Components">
+	<Fragment slot="head">
+		<meta name="robots" content="noindex, nofollow" />
+	</Fragment>
+
+	<div class="mx-auto flex max-w-[90rem] gap-10 px-6 py-10 max-lg:flex-col">
+		<aside class="w-56 shrink-0 max-lg:w-full">
+			<div class="sticky top-6">
+				<p class="mb-3 text-[0.75rem] font-medium uppercase tracking-wide text-secondary">
+					Components
+				</p>
+				<nav aria-label="Component catalog">
+					<ul class="flex flex-col gap-1 max-lg:flex-row max-lg:flex-wrap">
+						{
+							catalog.map((item) => (
+								<li>
+									<a
+										href={`#${item.id}`}
+										class="block rounded-[4px] px-2 py-1.5 text-[0.875rem] text-primary transition-colors hover:bg-border/40 hover:text-accent"
+									>
+										{item.label}
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</nav>
+			</div>
+		</aside>
+
+		<div class="min-w-0 flex-1 space-y-16">
+			<header class="border-b border-border pb-6">
+				<h1 class="font-heading text-[2rem] text-primary">Components</h1>
+				<p class="mt-2 max-w-2xl text-[0.9375rem] text-secondary">
+					Hidden overview of UI components. Not linked from the main navigation.
+				</p>
+			</header>
+
+			<section id="button" class="scroll-mt-8">
+				<div class="mb-6 flex flex-wrap items-baseline justify-between gap-2 border-b border-border pb-3">
+					<h2 class="text-[1.25rem] font-medium text-primary">Button</h2>
+					<code class="text-[0.75rem] text-secondary">src/components/Button.astro</code>
+				</div>
+
+				<div class="grid gap-6 sm:grid-cols-2">
+					<div class="rounded-[8px] border border-border p-6">
+						<p class="mb-4 text-[0.75rem] font-medium uppercase tracking-wide text-secondary">
+							Primary
+						</p>
+						<Button variant="primary">Donate</Button>
+					</div>
+					<div class="rounded-[8px] border border-border p-6">
+						<p class="mb-4 text-[0.75rem] font-medium uppercase tracking-wide text-secondary">
+							Secondary
+						</p>
+						<Button variant="secondary">Secondary</Button>
+					</div>
+				</div>
+			</section>
+
+			<section id="navigation" class="scroll-mt-8">
+				<div class="mb-6 flex flex-wrap items-baseline justify-between gap-2 border-b border-border pb-3">
+					<h2 class="text-[1.25rem] font-medium text-primary">Navigation</h2>
+					<code class="text-[0.75rem] text-secondary">src/components/Navigation.astro</code>
+				</div>
+
+				<div class="overflow-hidden rounded-[8px] border border-border">
+					<p class="border-b border-border bg-border/30 px-4 py-2 text-[0.75rem] font-medium uppercase tracking-wide text-secondary">
+						Preview
+					</p>
+					<div class="bg-background">
+						<Navigation preview />
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</Layout>

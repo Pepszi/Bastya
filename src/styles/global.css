@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+@theme {
+	--font-sans: "Quicksand", ui-sans-serif, system-ui, sans-serif;
+	--font-heading: "Quicksand", ui-sans-serif, system-ui, sans-serif;
+	--color-accent: #488ccb;
+	--color-primary: #2f404fbf;
+	--color-secondary: #96a4b3;
+	--color-background: #ffffff;
+	--color-border: #e8e8e8;
+}
+
+@layer base {
+	html {
+		font-family: var(--font-sans);
+		font-optical-sizing: auto;
+		font-style: normal;
+	}
+}
