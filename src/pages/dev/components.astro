@@ -1,11 +1,13 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/Button.astro';
+import Footer from '../../components/Footer.astro';
 import Navigation from '../../components/Navigation.astro';
 
 const catalog = [
 	{ id: 'button', label: 'Button' },
 	{ id: 'navigation', label: 'Navigation' },
+	{ id: 'footer', label: 'Footer' },
 ];
 ---
 
@@ -87,6 +89,22 @@ const catalog = [
 					</p>
 					<div class="bg-background">
 						<Navigation preview />
+					</div>
+				</div>
+			</section>
+
+			<section id="footer" class="scroll-mt-8">
+				<div class="mb-6 flex flex-wrap items-baseline justify-between gap-2 border-b border-border pb-3">
+					<h2 class="text-[1.25rem] font-medium text-primary">Footer</h2>
+					<code class="text-[0.75rem] text-secondary">src/components/Footer.astro</code>
+				</div>
+
+				<div class="overflow-hidden rounded-[8px] border border-border">
+					<p class="border-b border-border bg-border/30 px-4 py-2 text-[0.75rem] font-medium uppercase tracking-wide text-secondary">
+						Preview
+					</p>
+					<div class="bg-background">
+						<Footer preview />
 					</div>
 				</div>
 			</section>

@@ -7,11 +7,6 @@ interface Props {
 
 const { preview = false } = Astro.props;
 
-const aboutLinks = [
-	{ href: '/rolunk/csatlakozz-hozzank', label: 'Csatlakozz hozzánk' },
-	{ href: '/rolunk/beszamolok-palyazatok', label: 'Beszámolók, pályázatok' },
-];
-
 const eventLinks = [
 	{ href: '/esemenyek/jovobeli', label: 'Jövőbeli események' },
 	{ href: '/esemenyek/lezajlott', label: 'Lezajlott események' },
@@ -60,36 +55,13 @@ const simpleLinks = [
 			class="flex items-center gap-1 max-lg:absolute max-lg:left-0 max-lg:right-0 max-lg:top-full max-lg:z-50 max-lg:hidden max-lg:flex-col max-lg:items-stretch max-lg:gap-0 max-lg:border-b max-lg:border-border max-lg:bg-background max-lg:px-6 max-lg:py-3"
 			data-nav-menu
 		>
-			<li class="group relative max-lg:border-b max-lg:border-border" data-dropdown>
-				<button
-					type="button"
-					class="inline-flex items-center gap-1.5 px-3 py-2 text-[0.9375rem] font-medium text-primary transition-colors hover:text-accent max-lg:w-full max-lg:justify-between"
-					aria-expanded="false"
-					aria-haspopup="true"
-					data-dropdown-toggle
+			<li class="max-lg:border-b max-lg:border-border">
+				<a
+					href="/rolunk/bemutatkozas"
+					class="inline-flex px-3 py-2 text-[0.9375rem] font-medium text-primary transition-colors hover:text-accent max-lg:w-full"
 				>
-					Rólunk
-					<svg class="h-3.5 w-3.5 text-secondary" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-						<path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-					</svg>
-				</button>
-				<ul
-					class="absolute left-0 top-full z-50 hidden min-w-[14rem] rounded-[6px] border border-border bg-background py-1 shadow-sm group-hover:block group-focus-within:block max-lg:static max-lg:mt-0 max-lg:mb-2 max-lg:hidden max-lg:min-w-0 max-lg:border-0 max-lg:pl-3 max-lg:shadow-none max-lg:group-hover:hidden max-lg:group-focus-within:hidden"
-					data-dropdown-menu
-				>
-					{
-						aboutLinks.map((link) => (
-							<li>
-								<a
-									href={link.href}
-									class="block px-3 py-2 text-[0.875rem] text-primary transition-colors hover:bg-border/40 hover:text-accent max-lg:py-1.5"
-								>
-									{link.label}
-								</a>
-							</li>
-						))
-					}
-				</ul>
+					Bemutatkozás
+				</a>
 			</li>
 
 			<li class="group relative max-lg:border-b max-lg:border-border" data-dropdown>
