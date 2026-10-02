@@ -1,5 +1,253 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/Button.astro';
 ---
 
-<Layout title="Bemutatkozás" />
+<Layout title="Bemutatkozás">
+	<section class="bg-background py-20 max-md:py-14">
+		<div class="mx-auto grid max-w-[90rem] grid-cols-2 items-center gap-16 px-6 max-md:grid-cols-1 max-md:gap-10">
+			<div>
+				<img
+					src="/about/bemutatkozas.webp"
+					alt="Bástya közösség"
+					class="h-auto w-full"
+					width="640"
+					height="480"
+					loading="eager"
+				/>
+			</div>
+			<div>
+				<h1 class="font-heading text-[2rem] font-bold text-primary max-md:text-[1.75rem]">
+					Bemutatkozás
+				</h1>
+				<p class="mt-4 text-[1rem] text-primary">
+					A Bástya Terápiás Közösségi Alapítvány olyan támogató közösséget épít, ahol az élet nehéz időszakaiban az emberek irányt, reményt és új erőt találhatnak.
+				</p>
+				<p class="mt-4 text-[1rem] text-primary">
+					Keresztény értékrendre építve közösségi alkalmakon, beszélgetéseken és személyes kísérésen keresztül segítjük az embereket abban, hogy tisztábban lássák életüket és megtalálják a változás lehetőségét.
+				</p>
+				<p class="mt-4 text-[1rem] text-primary">
+					Segítségünket azoknak kínáljuk, akik:
+				</p>
+				<ul class="mt-4 list-disc space-y-2 pl-5 text-[1rem] text-primary">
+					<li>életük nehéz időszakában kapaszkodót vagy támogatást keresnek,</li>
+					<li>függőséggel közvetlenül vagy közvetve érintettek,</li>
+					<li>nyílt vagy rejtett bántalmazásban élnek,</li>
+					<li>magánéleti vagy párkapcsolati nehézségekkel küzdenek,</li>
+					<li>szeretnének tudatosabban rálátni saját életükre és döntéseikre,</li>
+					<li>nyitottak a személyes fejlődésre és a belső megújulásra.</li>
+				</ul>
+				<p class="mt-6 text-[1.125rem] font-semibold text-primary">
+					Amikor a lélek felszabadul, az élet új erőre kap.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section
+		class="bg-cover bg-center bg-no-repeat py-20 max-md:py-14"
+		style="background-image: url('/global/bg-1.webp')"
+	>
+		<div class="mx-auto max-w-[90rem] px-6">
+			<h2 class="font-heading text-[2rem] font-bold text-primary max-md:text-[1.75rem]">
+				Programjaink
+			</h2>
+			<p class="mt-4 max-w-[48rem] text-[1rem] text-primary">
+				A Bástya közösségi alkalmai és programjai a személyes fejlődést, a lelki megújulást és a közösségi kapcsolatok erősítését szolgálják.
+			</p>
+			<p class="mt-4 text-[1rem] text-primary">
+				Programjaink között megtalálhatók:
+			</p>
+			<ul class="mt-4 list-disc space-y-2 pl-5 text-[1rem] text-primary">
+				<li>közösségi és élményalapú programok a kapcsolódásért</li>
+				<li>önismereti és támogató alkalmak biztonságos közegben</li>
+				<li>beszélgetések és workshopok szakemberek vezetésével</li>
+				<li>szemléletformáló előadások, amelyek új felismerésekhez és irányokhoz segítenek</li>
+				<li>testi-lelki egyensúlyt és egészséget támogató előadások és gyakorlatok</li>
+				<li>személyes kísérés és mentorálás az egyéni fejlődéshez</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="bg-background py-20 max-md:py-14">
+		<div class="mx-auto grid max-w-[90rem] grid-cols-2 items-center gap-16 px-6 max-md:grid-cols-1 max-md:gap-10">
+			<div>
+				<h2 class="font-heading text-[2rem] font-bold text-primary max-md:text-[1.75rem]">
+					Küldetésünk
+				</h2>
+				<p class="mt-4 text-[1.125rem] font-semibold text-primary">
+					Küldetésünk, hogy irányt, felismeréseket és közösséget adjunk a változáshoz.
+				</p>
+				<p class="mt-4 text-[1rem] text-primary">
+					Hisszük, hogy apró, kitartó lépésekkel bárki képes változtatni életén. Nem hagyunk senkit egyedül: a közösség erejével kísérjük az embereket a gyógyulás és a kiteljesedés útján.
+				</p>
+				<blockquote class="mt-6 border-l-4 border-accent pl-4 text-[1rem] italic text-primary">
+					„Jöjjetek énhozzám mindnyájan, akik megfáradtatok és én megnyugvást adok lelketeknek.” (Mt, 11,28.)
+				</blockquote>
+				<p class="mt-6 text-[1.125rem] font-semibold text-primary">
+					Tisztábban látni – szabadabban élni!
+				</p>
+			</div>
+			<div>
+				<img
+					src="/about/kuldetes.webp"
+					alt="Küldetésünk"
+					class="h-auto w-full"
+					width="640"
+					height="480"
+					loading="lazy"
+				/>
+			</div>
+		</div>
+	</section>
+
+	<section
+		class="bg-cover bg-center bg-no-repeat py-20 max-md:py-14"
+		style="background-image: url('/global/bg-2.webp')"
+	>
+		<div class="mx-auto grid max-w-[90rem] grid-cols-2 items-center gap-16 px-6 max-md:grid-cols-1 max-md:gap-10">
+			<div>
+				<img
+					src="/about/vizio.webp"
+					alt="Víziónk"
+					class="h-auto w-full"
+					width="640"
+					height="480"
+					loading="lazy"
+				/>
+			</div>
+			<div>
+				<h2 class="font-heading text-[2rem] font-bold text-primary max-md:text-[1.75rem]">
+					Víziónk
+				</h2>
+				<p class="mt-4 text-[1rem] text-primary">
+					Olyan társadalmat szeretnénk, ahol minden ember megélheti a lelki szabadságot, felismerheti saját értékeit és biztos alapokra építheti az életét.
+				</p>
+				<p class="mt-4 text-[1rem] text-primary">
+					Célunk, hogy Szigetszentmiklóson, környékén, valamint az online térben országosan is elérjük mindazokat, akik változásra, reményre és valódi támogatásra vágynak.
+				</p>
+				<p class="mt-6 text-[1.125rem] font-semibold text-primary">
+					Hitből erő, közösségből remény.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="bg-background py-20 max-md:py-14">
+		<div class="mx-auto max-w-[90rem] px-6">
+			<h2 class="font-heading text-[2rem] font-bold text-primary max-md:text-[1.75rem]">
+				Értékeink
+			</h2>
+			<p class="mt-4 text-[1.125rem] font-semibold text-primary">
+				Szeretetből építkezünk.
+			</p>
+
+			<div class="mt-10 grid grid-cols-3 gap-6 max-lg:grid-cols-2 max-md:grid-cols-1">
+				<article class="rounded-[8px] border border-border p-6">
+					<h3 class="font-heading text-[1.25rem] font-bold text-primary">
+						Keresztény értékrend
+					</h3>
+					<p class="mt-2 text-[1rem] text-primary">
+						A szeretet, az irgalom, az elfogadás és a szolgálat értékei vezetik a munkánkat.
+					</p>
+				</article>
+				<article class="rounded-[8px] border border-border p-6">
+					<h3 class="font-heading text-[1.25rem] font-bold text-primary">
+						Emberi méltóság
+					</h3>
+					<p class="mt-2 text-[1rem] text-primary">
+						Hiszünk abban, hogy minden ember értékes és tiszteletet érdemel élethelyzetétől függetlenül.
+					</p>
+				</article>
+				<article class="rounded-[8px] border border-border p-6">
+					<h3 class="font-heading text-[1.25rem] font-bold text-primary">
+						Remény és megújulás
+					</h3>
+					<p class="mt-2 text-[1rem] text-primary">
+						Minden ember életében lehetséges a változás és az újrakezdés.
+					</p>
+				</article>
+				<article class="rounded-[8px] border border-border p-6">
+					<h3 class="font-heading text-[1.25rem] font-bold text-primary">
+						Közösség és egymás támogatása
+					</h3>
+					<p class="mt-2 text-[1rem] text-primary">
+						A közösség ereje segít megtartani és megerősíteni az embert a nehéz időszakokban.
+					</p>
+				</article>
+				<article class="rounded-[8px] border border-border p-6">
+					<h3 class="font-heading text-[1.25rem] font-bold text-primary">
+						Felelősség és önismeret
+					</h3>
+					<p class="mt-2 text-[1rem] text-primary">
+						Fontosnak tartjuk, hogy az emberek felismerjék saját értékeiket és felelősséget vállaljanak életük alakulásáért.
+					</p>
+				</article>
+			</div>
+
+			<blockquote class="mt-12 border-l-4 border-accent pl-4 text-[1rem] italic text-primary">
+				„Mert, ahogyan az ember gondolkozik szívében, olyan ő.” (Péld. 23,7.)
+			</blockquote>
+			<p class="mt-6 text-[1.125rem] font-semibold text-primary">
+				Minden lehetséges annak, aki hisz.
+			</p>
+
+			<img
+				src="/about/ertek.webp"
+				alt="Értékeink"
+				class="mt-12 h-auto w-full"
+				width="1280"
+				height="720"
+				loading="lazy"
+			/>
+		</div>
+	</section>
+
+	<section
+		id="csatlakozz"
+		class="relative bg-cover bg-center bg-no-repeat py-20 max-md:py-14"
+		style="background-image: url('/about/fuszalak.webp')"
+	>
+		<div class="absolute inset-0 bg-background/85" aria-hidden="true"></div>
+		<div class="relative mx-auto max-w-[90rem] px-6">
+			<h2 class="font-heading text-[2rem] font-bold text-primary max-md:text-[1.75rem]">
+				Csatlakozz hozzánk
+			</h2>
+			<p class="mt-4 text-[1.125rem] font-semibold text-primary">
+				Szeretnél másoknak segíteni, és közben te is fejlődni?
+			</p>
+			<p class="mt-4 max-w-[48rem] text-[1rem] text-primary">
+				A Bástya Terápiás Közösségi Alapítványnál lehetőséged van arra, hogy egy támogató közösség részévé válj, és valódi változásban vegyél részt.
+			</p>
+			<p class="mt-4 text-[1rem] text-primary">
+				Nálunk az önkéntesség nem csak feladat, hanem lehetőséged van:
+			</p>
+			<ul class="mt-4 list-disc space-y-2 pl-5 text-[1rem] text-primary">
+				<li>részt venni programokban</li>
+				<li>segíteni a szervezésben</li>
+				<li>jelen lenni és támogatni másokat</li>
+				<li>egy értékalapú közösséghez tartozni</li>
+			</ul>
+
+			<h3 class="mt-10 font-heading text-[1.375rem] font-bold text-primary max-md:text-[1.25rem]">
+				Diákoknak
+			</h3>
+			<p class="mt-3 max-w-[48rem] text-[1rem] text-primary">
+				Lehetőséget biztosítunk iskolai közösségi szolgálat teljesítésére is.
+			</p>
+			<p class="mt-3 max-w-[48rem] text-[1rem] text-primary">
+				Az elvégzett önkéntes munkát igazolni tudjuk.
+			</p>
+
+			<h3 class="mt-10 font-heading text-[1.375rem] font-bold text-primary max-md:text-[1.25rem]">
+				Csatlakozás
+			</h3>
+			<p class="mt-3 max-w-[48rem] text-[1rem] text-primary">
+				Ha szeretnél csatlakozni, írj nekünk, és felvesszük veled a kapcsolatot.
+			</p>
+			<Button href="/kapcsolat" variant="primary" class="mt-6">
+				Jelentkezem
+			</Button>
+		</div>
+	</section>
+</Layout>
