@@ -16,4 +16,8 @@
 		font-optical-sizing: auto;
 		font-style: normal;
 	}
+
+	img {
+		border-radius: 4px;
+	}
 }

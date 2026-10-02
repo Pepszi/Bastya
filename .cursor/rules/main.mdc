@@ -17,6 +17,7 @@ alwaysApply: true
 * **Strict Color Usage:** Use only the theme colors defined in `src/styles/global.css`. Do **not** invent arbitrary hex codes or use default Tailwind colors.
 * **Typography:** Use only **Quicksand** (`font-sans` / `font-heading`) for all text. Loaded via Google Fonts in `src/layouts/Layout.astro`; family is defined in `src/styles/global.css` via `@theme`. Do not use other font families.
 * **Units:** Do not use `px` for font sizes — use `rem` instead. When the user specifies a value in `px`, always convert it to `rem` first (16px = 1rem) before applying it in code. **Exception:** border radius values may use `px`.
+* **Images:** All `<img>` elements get a `4px` border radius from the base styles in `src/styles/global.css`. Do not redeclare this per image unless intentionally overriding it.
 * **Container:** The max width of the content should be 1440px.
 
 ## Responsive & Mobile-First Design
