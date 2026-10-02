@@ -1,5 +1,117 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+
+const beszamolok = [
+	{
+		title: '2025. év beszámolója',
+		description:
+			'A kettős könyvvitelt vezető egyéb szervezet egyszerűsített éves beszámolója és közhasznúsági melléklet',
+		href: '/beszamolok/beszamolo-2025.pdf',
+	},
+	{
+		title: '2024. év beszámolója',
+		description:
+			'A kettős könyvvitelt vezető egyéb szervezet egyszerűsített éves beszámolója és közhasznúsági melléklet',
+		href: '/beszamolok/beszamolo-2024.pdf',
+	},
+];
+
+const tamogatasok = [
+	{
+		title: 'Támogatási szerződés – 07/2375-3/2026',
+		description:
+			'Szigetszentmiklós Város Önkormányzata által önszerveződő, öntevékeny célokra nyújtott támogatás.',
+		href: '/beszamolok/tamogatasi-szerzodes-07-2375-3-2026.pdf',
+	},
+	{
+		title: 'Támogatási szerződés – 07/2374-3/2026',
+		description:
+			'Szigetszentmiklós Város Önkormányzata által kulturális célokra nyújtott támogatás.',
+		href: '/beszamolok/tamogatasi-szerzodes-07-2374-3-2026.pdf',
+	},
+	{
+		title: 'Támogatási szerződés – 04/440-3/2025',
+		description: 'Egyéni képviselői keretből nyújtott támogatás működési költségekre.',
+		href: '/beszamolok/tamogatasi-szerzodes-04-440-3-2025.pdf',
+	},
+	{
+		title: 'Támogatási szerződés – 04/356-3/2025',
+		description:
+			'Szigetszentmiklós Város Önkormányzata által kulturális célokra nyújtott támogatás.',
+		href: '/beszamolok/tamogatasi-szerzodes-04-356-3-2025.pdf',
+	},
+	{
+		title: 'Támogatási szerződés – 04/346-3/2025',
+		description:
+			'Szigetszentmiklós Város Önkormányzata által önszerveződő, öntevékeny célokra nyújtott támogatás.',
+		href: '/beszamolok/tamogatasi-szerzodes-04-346-3-2025.pdf',
+	},
+];
 ---
 
-<Layout title="Beszámolók, pályázatok" />
+<Layout title="Beszámolók, pályázatok">
+	<section
+		class="relative flex h-[40vh] min-h-[16rem] items-end bg-cover bg-center bg-no-repeat"
+		style="background-image: url('/home/hero.webp')"
+		aria-label="Beszámolók, pályázatok"
+	>
+		<div class="mx-auto w-full max-w-[90rem] px-6 pb-12 max-sm:pb-8">
+			<h1 class="max-w-[40rem] text-background">Beszámolók, pályázatok</h1>
+		</div>
+	</section>
+
+	<section class="bg-background py-20 max-md:py-14">
+		<div class="mx-auto max-w-[90rem] px-6">
+			<h2 class="text-primary">Beszámolók</h2>
+			<ul class="mt-10 space-y-8">
+				{
+					beszamolok.map((item) => (
+						<li>
+							<h3 class="text-primary">{item.title}</h3>
+							<p class="mt-2 max-w-[48rem] text-[1rem] text-primary">
+								{item.description}
+							</p>
+							<a
+								href={item.href}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="mt-2 inline-block font-semibold text-accent transition-colors hover:text-accent/80"
+							>
+								Letöltés
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	<section
+		class="bg-cover bg-center bg-no-repeat py-20 max-md:py-14"
+		style="background-image: url('/global/bg-1.webp')"
+	>
+		<div class="mx-auto max-w-[90rem] px-6">
+			<h2 class="text-primary">Támogatási szerződések</h2>
+			<ul class="mt-10 space-y-8">
+				{
+					tamogatasok.map((item) => (
+						<li>
+							<h3 class="text-primary">{item.title}</h3>
+							<p class="mt-2 max-w-[48rem] text-[1rem] text-primary">
+								{item.description}
+							</p>
+							<a
+								href={item.href}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="mt-2 inline-block font-semibold text-accent transition-colors hover:text-accent/80"
+							>
+								Letöltés
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+</Layout>
