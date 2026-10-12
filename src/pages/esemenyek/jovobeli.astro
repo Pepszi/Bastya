@@ -1,5 +1,30 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import EventCard from '../../components/EventCard.astro';
+import { loadEventCards } from '../../scripts/events';
+
+const events = await loadEventCards(true);
 ---
 
-<Layout title="Jövőbeli események" />
+<Layout title="Jövőbeli események">
+	<section class="bg-background py-20 max-md:py-14">
+		<div class="mx-auto max-w-[90rem] px-6">
+			<h1 class="text-primary">Jövőbeli események</h1>
+			{
+				events.length === 0 ? (
+					<p class="mt-8 max-w-[36rem] text-[1.0625rem] leading-relaxed">
+						Jelenleg nincs jövőbeli esemény.
+					</p>
+				) : (
+					<ul class="mt-10 grid grid-cols-3 gap-x-8 gap-y-12 max-lg:grid-cols-2 max-md:grid-cols-1">
+						{events.map((event) => (
+							<li>
+								<EventCard {...event} />
+							</li>
+						))}
+					</ul>
+				)
+			}
+		</div>
+	</section>
+</Layout>

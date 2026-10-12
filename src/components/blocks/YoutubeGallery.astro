@@ -1,0 +1,95 @@
+---
+import { youtubeEmbedUrl, youtubeId, youtubePosterUrl } from '../../scripts/youtube';
+import MediaLightbox from './MediaLightbox.astro';
+
+interface Video {
+	id: string;
+	embedUrl: string;
+	posterUrl: string;
+	title: string;
+}
+
+interface Props {
+	value: {
+		_type: 'youtube_gallery';
+		_version: number;
+		_key: string;
+		videos?: unknown;
+	};
+	index: number;
+	blockKey: string;
+}
+
+const videos = readVideos(Astro.props.value.videos);
+
+function readVideos(videos: unknown): Video[] {
+	if (!Array.isArray(videos)) return [];
+
+	return videos.flatMap((row) => {
+		if (!row || typeof row !== 'object') return [];
+		const record = row as { url?: unknown; title?: unknown };
+		if (typeof record.url !== 'string') return [];
+
+		const id = youtubeId(record.url);
+		if (!id) return [];
+
+		const title = typeof record.title === 'string' ? record.title.trim() : '';
+		return [
+			{
+				id,
+				embedUrl: youtubeEmbedUrl(id),
+				posterUrl: youtubePosterUrl(id),
+				title,
+			},
+		];
+	});
+}
+---
+
+{
+	videos.length > 0 && (
+		<div class="mt-10" data-media-lightbox>
+			<ul class="grid grid-cols-3 gap-4 max-lg:grid-cols-2 max-md:grid-cols-1">
+				{videos.map((video) => (
+					<li>
+						<figure>
+							<button
+								type="button"
+								class="relative block w-full cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+								data-lightbox-open
+								data-kind="video"
+								data-src={video.embedUrl}
+								data-alt={video.title || 'YouTube videó'}
+								data-caption={video.title}
+								aria-label={video.title || 'YouTube videó lejátszása'}
+							>
+								<span class="block aspect-video overflow-hidden">
+									<img
+										src={video.posterUrl}
+										alt=""
+										class="h-full w-full object-cover"
+										loading="lazy"
+										decoding="async"
+									/>
+								</span>
+								<span class="pointer-events-none absolute top-1/2 left-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-background text-primary">
+									<svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+										<path d="M7 5.2v9.6l8-4.8-8-4.8z" />
+									</svg>
+								</span>
+							</button>
+							{video.title && (
+								<figcaption class="mt-2 text-[0.875rem] text-secondary">{video.title}</figcaption>
+							)}
+						</figure>
+					</li>
+				))}
+			</ul>
+			<MediaLightbox label="YouTube videók" />
+			<script>
+				import { initMediaLightboxes } from '../../scripts/media-lightbox';
+				initMediaLightboxes();
+			</script>
+		</div>
+	)
+}

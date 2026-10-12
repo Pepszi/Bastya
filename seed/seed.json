@@ -1,0 +1,146 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"defaultLocale": "hu",
+	"meta": {
+		"name": "Bástya",
+		"description": "Események a Bástya oldalhoz"
+	},
+	"blockTypes": [
+		{
+			"slug": "photo_gallery",
+			"label": "Fotógaléria",
+			"description": "Négyoszlopos képgaléria, a képek nagyítva nyílnak meg",
+			"icon": "images",
+			"category": "Média",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "images",
+							"label": "Képek",
+							"type": "repeater",
+							"validation": {
+								"maxItems": 48,
+								"subFields": [
+									{
+										"slug": "image",
+										"label": "Kép",
+										"type": "image",
+										"required": true
+									},
+									{ "slug": "caption", "label": "Felirat", "type": "string" }
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "youtube_gallery",
+			"label": "YouTube videók",
+			"description": "Háromoszlopos videógaléria, a videók lejátszóban nyílnak meg",
+			"icon": "youtube-logo",
+			"category": "Média",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "videos",
+							"label": "Videók",
+							"type": "repeater",
+							"validation": {
+								"maxItems": 12,
+								"subFields": [
+									{
+										"slug": "url",
+										"label": "YouTube link",
+										"type": "url",
+										"required": true
+									},
+									{ "slug": "title", "label": "Cím", "type": "string" }
+								]
+							}
+						}
+					]
+				}
+			]
+		}
+	],
+	"settings": {
+		"title": "Bástya",
+		"timezone": "Europe/Budapest",
+		"dateFormat": "yyyy. MMMM d."
+	},
+	"collections": [
+		{
+			"slug": "events",
+			"label": "Események",
+			"labelSingular": "Esemény",
+			"description": "Jövőbeli és lezajlott események",
+			"icon": "calendar-blank",
+			"supports": ["drafts", "revisions", "preview", "search", "seo"],
+			"urlPattern": "/esemenyek/{slug}",
+			"titleField": "title",
+			"dateField": "start_date",
+			"admin": {
+				"listColumns": ["start_date", "end_date"]
+			},
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Cím",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "image",
+					"label": "Kép",
+					"type": "image",
+					"required": true
+				},
+				{
+					"slug": "summary",
+					"label": "Rövid leírás",
+					"type": "text",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "body",
+					"label": "Leírás",
+					"type": "portableText"
+				},
+				{
+					"slug": "sections",
+					"label": "Blokkok",
+					"type": "blocks",
+					"validation": {
+						"allowedTypes": ["photo_gallery", "youtube_gallery"],
+						"maxItems": 20
+					}
+				},
+				{
+					"slug": "start_date",
+					"label": "Kezdés",
+					"type": "datetime",
+					"required": true,
+					"indexed": true
+				},
+				{
+					"slug": "end_date",
+					"label": "Befejezés",
+					"type": "datetime",
+					"required": true,
+					"indexed": true
+				}
+			]
+		}
+	]
+}

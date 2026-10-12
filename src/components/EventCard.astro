@@ -1,0 +1,46 @@
+---
+import { Image } from 'emdash/ui';
+import type { ImageValue } from 'emdash';
+
+interface Props {
+	href: string;
+	title: string;
+	dates: string;
+	summary: string;
+	image: ImageValue | string;
+	imageAlt: string;
+}
+
+const { href, title, dates, summary, image, imageAlt } = Astro.props;
+---
+
+<article class="h-full">
+	<a
+		href={href}
+		class="group flex h-full flex-col focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+	>
+		<div class="aspect-[4/3] overflow-hidden">
+			{
+				typeof image === 'string' ? (
+					<img
+						src={image}
+						alt={imageAlt}
+						class="h-full w-full object-cover"
+						loading="lazy"
+						decoding="async"
+					/>
+				) : (
+					<Image
+						image={image}
+						alt={imageAlt}
+						class="h-full w-full object-cover"
+						sizes="(min-width: 64rem) 28rem, (min-width: 48rem) 50vw, 100vw"
+					/>
+				)
+			}
+		</div>
+		<h2 class="mt-4 text-h5 text-primary transition-colors group-hover:text-accent">{title}</h2>
+		<p class="mt-1 text-[0.875rem] text-secondary">{dates}</p>
+		<p class="mt-3 line-clamp-4 text-[0.9375rem] leading-relaxed text-primary">{summary}</p>
+	</a>
+</article>

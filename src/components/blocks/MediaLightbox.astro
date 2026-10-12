@@ -1,0 +1,55 @@
+---
+interface Props {
+	label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<dialog
+	class="m-auto w-[min(92vw,72rem)] max-w-full border-0 bg-transparent p-0 backdrop:bg-primary/80"
+	data-lightbox-dialog
+	aria-label={label}
+>
+	<div class="flex flex-col gap-3">
+		<img
+			data-lightbox-image
+			alt=""
+			class="max-h-[80vh] w-full bg-primary object-contain"
+		/>
+		<div class="aspect-video w-full overflow-hidden bg-primary" data-lightbox-frame-wrap hidden>
+			<iframe
+				data-lightbox-frame
+				class="h-full w-full"
+				title="YouTube videó"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+				referrerpolicy="strict-origin-when-cross-origin"
+				allowfullscreen
+			></iframe>
+		</div>
+		<p class="text-[0.9375rem] text-background" data-lightbox-caption hidden></p>
+		<div class="flex flex-wrap items-center justify-between gap-3">
+			<button
+				type="button"
+				class="cursor-pointer rounded-[6px] bg-background px-3 py-2 text-[0.9375rem] font-medium text-primary"
+				data-lightbox-prev
+			>
+				Előző
+			</button>
+			<button
+				type="button"
+				class="cursor-pointer rounded-[6px] bg-background px-3 py-2 text-[0.9375rem] font-medium text-primary"
+				data-lightbox-close
+			>
+				Bezárás
+			</button>
+			<button
+				type="button"
+				class="cursor-pointer rounded-[6px] bg-background px-3 py-2 text-[0.9375rem] font-medium text-primary"
+				data-lightbox-next
+			>
+				Következő
+			</button>
+		</div>
+	</div>
+</dialog>

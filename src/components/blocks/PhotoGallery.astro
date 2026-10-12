@@ -1,0 +1,114 @@
+---
+import { Image } from 'emdash/ui';
+import type { ImageValue } from 'emdash';
+import MediaLightbox from './MediaLightbox.astro';
+
+interface Photo {
+	image: ImageValue | string;
+	src: string;
+	alt: string;
+	caption: string;
+}
+
+interface Props {
+	value: {
+		_type: 'photo_gallery';
+		_version: number;
+		_key: string;
+		images?: unknown;
+	};
+	index: number;
+	blockKey: string;
+}
+
+const photos = readPhotos(Astro.props.value.images);
+
+function readPhotos(images: unknown): Photo[] {
+	if (!Array.isArray(images)) return [];
+
+	return images.flatMap((row) => {
+		if (!row || typeof row !== 'object') return [];
+		const record = row as { image?: unknown; caption?: unknown };
+		const caption = typeof record.caption === 'string' ? record.caption.trim() : '';
+		const image = record.image;
+
+		if (typeof image === 'string' && image.length > 0) {
+			return [{ image, src: image, alt: caption || 'Galéria kép', caption }];
+		}
+
+		if (!image || typeof image !== 'object' || Array.isArray(image)) return [];
+		const media = image as ImageValue;
+		const src = mediaUrl(media);
+		if (!src) return [];
+
+		return [{ image: media, src, alt: media.alt || caption || 'Galéria kép', caption }];
+	});
+}
+
+function mediaUrl(image: ImageValue): string {
+	if (typeof image.src === 'string' && image.src.length > 0) return image.src;
+
+	const storageKey = image.meta?.storageKey;
+	if (typeof storageKey === 'string' && /^[A-Za-z0-9._-]+$/.test(storageKey)) {
+		return `/_emdash/api/media/file/${storageKey}`;
+	}
+
+	if (typeof image.id === 'string' && image.id.length > 0) {
+		return `/_emdash/api/media/file/${encodeURIComponent(image.id)}`;
+	}
+
+	return '';
+}
+---
+
+{
+	photos.length > 0 && (
+		<div class="mt-10" data-media-lightbox>
+			<ul class="grid grid-cols-4 gap-3 max-lg:grid-cols-2 max-sm:grid-cols-1">
+				{photos.map((photo) => (
+					<li>
+						<figure>
+							<button
+								type="button"
+								class="block w-full cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+								data-lightbox-open
+								data-kind="image"
+								data-src={photo.src}
+								data-alt={photo.alt}
+								data-caption={photo.caption}
+								aria-label={photo.caption || photo.alt}
+							>
+								<span class="block aspect-square overflow-hidden">
+									{typeof photo.image === 'string' ? (
+										<img
+											src={photo.image}
+											alt=""
+											class="h-full w-full object-cover"
+											loading="lazy"
+											decoding="async"
+										/>
+									) : (
+										<Image
+											image={photo.image}
+											alt=""
+											class="h-full w-full object-cover"
+											sizes="(min-width: 64rem) 22rem, (min-width: 40rem) 50vw, 100vw"
+										/>
+									)}
+								</span>
+							</button>
+							{photo.caption && (
+								<figcaption class="mt-2 text-[0.875rem] text-secondary">{photo.caption}</figcaption>
+							)}
+						</figure>
+					</li>
+				))}
+			</ul>
+			<MediaLightbox label="Fotógaléria" />
+			<script>
+				import { initMediaLightboxes } from '../../scripts/media-lightbox';
+				initMediaLightboxes();
+			</script>
+		</div>
+	)
+}

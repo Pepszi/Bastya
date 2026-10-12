@@ -1,11 +1,17 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/Button.astro';
+import EventCard from '../../components/EventCard.astro';
+import PhotoGallery from '../../components/blocks/PhotoGallery.astro';
+import YoutubeGallery from '../../components/blocks/YoutubeGallery.astro';
 import Footer from '../../components/Footer.astro';
 import Navigation from '../../components/Navigation.astro';
 
 const catalog = [
 	{ id: 'button', label: 'Button' },
+	{ id: 'event-card', label: 'Event card' },
+	{ id: 'photo-gallery', label: 'Photo gallery' },
+	{ id: 'youtube-gallery', label: 'YouTube gallery' },
 	{ id: 'navigation', label: 'Navigation' },
 	{ id: 'footer', label: 'Footer' },
 ];
@@ -75,6 +81,69 @@ const catalog = [
 						<Button variant="secondary-white">Secondary white</Button>
 					</div>
 				</div>
+			</section>
+
+			<section id="event-card" class="scroll-mt-8">
+				<div class="mb-6 flex flex-wrap items-baseline justify-between gap-2 border-b border-border pb-3">
+					<h2 class="text-h4 font-medium text-primary">Event card</h2>
+					<code class="text-[0.75rem] text-secondary">src/components/EventCard.astro</code>
+				</div>
+
+				<ul class="grid grid-cols-3 gap-x-8 gap-y-12 max-lg:grid-cols-2 max-md:grid-cols-1">
+					<li>
+						<EventCard
+							href="/esemenyek/jovobeli"
+							title="Nyílt nap a bástyánál"
+							dates="2026. október 18."
+							summary="Egy délután a programról, kérdésekkel és egy rövid sétával az épületben."
+							image="/galeria/galeria-02.webp"
+							imageAlt="A bástya belső tere"
+						/>
+					</li>
+				</ul>
+			</section>
+
+			<section id="photo-gallery" class="scroll-mt-8">
+				<div class="mb-6 flex flex-wrap items-baseline justify-between gap-2 border-b border-border pb-3">
+					<h2 class="text-h4 font-medium text-primary">Photo gallery</h2>
+					<code class="text-[0.75rem] text-secondary">src/components/blocks/PhotoGallery.astro</code>
+				</div>
+				<PhotoGallery
+					value={{
+						_type: 'photo_gallery',
+						_version: 1,
+						_key: 'catalog-photos',
+						images: [
+							{ image: '/galeria/galeria-02.webp', caption: 'Belső tér' },
+							{ image: '/galeria/galeria-08.webp', caption: 'Udvar' },
+							{ image: '/galeria/galeria-16.webp' },
+							{ image: '/galeria/galeria-17.webp' },
+						],
+					}}
+					index={0}
+					blockKey="catalog-photos"
+				/>
+			</section>
+
+			<section id="youtube-gallery" class="scroll-mt-8">
+				<div class="mb-6 flex flex-wrap items-baseline justify-between gap-2 border-b border-border pb-3">
+					<h2 class="text-h4 font-medium text-primary">YouTube gallery</h2>
+					<code class="text-[0.75rem] text-secondary">src/components/blocks/YoutubeGallery.astro</code>
+				</div>
+				<YoutubeGallery
+					value={{
+						_type: 'youtube_gallery',
+						_version: 1,
+						_key: 'catalog-videos',
+						videos: [
+							{ url: 'https://www.youtube.com/watch?v=xefdg-9LMuo', title: 'Adj esélyt' },
+							{ url: 'https://youtu.be/xefdg-9LMuo', title: 'Rövid link' },
+							{ url: 'https://www.youtube.com/embed/xefdg-9LMuo', title: 'Beágyazott link' },
+						],
+					}}
+					index={0}
+					blockKey="catalog-videos"
+				/>
 			</section>
 
 			<section id="navigation" class="scroll-mt-8">

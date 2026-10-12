@@ -1,0 +1,102 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Blocks, Image, PortableText, defineBlockComponents } from 'emdash/ui';
+import { decodeSlug } from 'emdash';
+import PhotoGallery from '../../components/blocks/PhotoGallery.astro';
+import YoutubeGallery from '../../components/blocks/YoutubeGallery.astro';
+import { loadEvent } from '../../scripts/events';
+
+const slug = decodeSlug(Astro.params.slug);
+const event = slug ? await loadEvent(slug) : null;
+if (!event) Astro.response.status = 404;
+
+const listHref = event?.upcoming ? '/esemenyek/jovobeli' : '/esemenyek/lezajlott';
+const listLabel = event?.upcoming ? 'Jövőbeli események' : 'Lezajlott események';
+const hasBody = Array.isArray(event?.body) && event.body.length > 0;
+const sections = Array.isArray(event?.sections) ? event.sections : [];
+const blockComponents = defineBlockComponents({
+	photo_gallery: PhotoGallery,
+	youtube_gallery: YoutubeGallery,
+});
+---
+
+<Layout title={event ? event.title : 'Esemény'}>
+	{
+		!event ? (
+			<section class="bg-background py-20 max-md:py-14">
+				<div class="mx-auto max-w-[46rem] px-6">
+					<h1 class="text-primary">Ez az esemény nem található.</h1>
+					<a href="/esemenyek/jovobeli" class="mt-6 inline-block text-[0.9375rem] text-accent hover:underline">
+						Jövőbeli események
+					</a>
+				</div>
+			</section>
+		) : (
+	<article class="bg-background py-20 max-md:py-14">
+		<div class="mx-auto max-w-[46rem] px-6">
+			<a href={listHref} class="text-[0.9375rem] text-accent hover:underline">
+				{listLabel}
+			</a>
+			<h1 class="mt-4 text-primary">{event.title}</h1>
+			<p class="mt-3 text-[1.0625rem] text-secondary">{event.dates}</p>
+			<div class="mt-8 overflow-hidden">
+				<Image
+					image={event.image}
+					alt={event.imageAlt}
+					priority
+					class="aspect-[16/9] w-full object-cover"
+					sizes="(min-width: 46rem) 46rem, 100vw"
+				/>
+			</div>
+			<p class="mt-8 text-[1.125rem] leading-relaxed">{event.summary}</p>
+			{
+				hasBody && (
+					<div class="event-body mt-6 text-[1.0625rem] leading-relaxed">
+						<PortableText value={event.body} />
+					</div>
+				)
+			}
+		</div>
+		{
+			sections.length > 0 && (
+				<div class="mx-auto mt-4 max-w-[90rem] px-6">
+					<Blocks value={sections} components={blockComponents} />
+				</div>
+			)
+		}
+	</article>
+		)
+	}
+</Layout>
+
+<style>
+	.event-body :global(p + p),
+	.event-body :global(ul),
+	.event-body :global(ol),
+	.event-body :global(blockquote) {
+		margin-top: 1rem;
+	}
+
+	.event-body :global(h2),
+	.event-body :global(h3) {
+		margin-top: 1.75rem;
+	}
+
+	.event-body :global(ul),
+	.event-body :global(ol) {
+		padding-left: 1.25rem;
+	}
+
+	.event-body :global(ul) {
+		list-style: disc;
+	}
+
+	.event-body :global(ol) {
+		list-style: decimal;
+	}
+
+	.event-body :global(a) {
+		color: var(--color-accent);
+		text-decoration: underline;
+	}
+</style>
