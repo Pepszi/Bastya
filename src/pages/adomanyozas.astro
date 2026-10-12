@@ -1,5 +1,69 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const transferDetails = [
+	{ label: 'Bankszámlaszám', value: '11742180-20068152-00000000' },
+	{ label: 'Számlatulajdonos', value: 'Bástya Terápiás Közösségi Alapítvány' },
+	{ label: 'Adószám', value: '18674839-1-13' },
+	{ label: 'Cím', value: '2310 Szigetszentmiklós, Kálvin tér 3.' },
+];
 ---
 
-<Layout title="Adományozás" />
+<Layout title="Adományozás">
+	<section class="bg-background py-20 max-lg:py-16 max-md:py-14">
+		<div
+			class="mx-auto grid max-w-[90rem] grid-cols-[1fr_2fr] items-start gap-16 px-6 max-lg:gap-10 max-md:grid-cols-1"
+		>
+			<img
+				src="/adomanyozas/adomanyozas-plakat.webp"
+				alt="Adományozási plakát: Nem minden fájdalom látszik. Te segíthetsz. Bástya Terápiás Közösségi Alapítvány."
+				class="h-auto w-full"
+				width="773"
+				height="1158"
+				loading="eager"
+				fetchpriority="high"
+			/>
+
+			<div>
+				<h1 class="text-h2 text-primary">
+					Támogasd a Bástya Terápiás Közösségi Alapítványt!
+				</h1>
+				<p class="mt-4 text-[1.125rem] font-semibold text-primary">
+					Köszönjük, hogy felajánlod támogatásodat!
+				</p>
+				<p class="mt-4 text-[1rem] text-primary">
+					Az adományokat a következő adatokkal tudod eljuttatni hozzánk:
+				</p>
+
+				<dl class="mt-6 divide-y divide-border rounded-[8px] border border-border">
+					{
+						transferDetails.map((detail) => (
+							<div class="px-5 py-4">
+								<dt class="text-[0.875rem] font-semibold text-primary">{detail.label}</dt>
+								<dd class="mt-1 break-words text-[1.125rem] font-semibold text-primary select-all">
+									{detail.value}
+								</dd>
+							</div>
+						))
+					}
+				</dl>
+
+				<p class="mt-6 text-[1rem] text-primary">
+					Kérjük, az utalás közleményében jelezd, hogy adomány. Amennyiben itt megadod e-mail
+					címedet, szívesen megköszönjük levélben is felajánlásodat.
+				</p>
+				<p class="mt-4 text-[1rem] text-primary">
+					Minden támogatás segít abban, hogy már a problémák korai szakaszában nyújthassunk
+					segítséget azoknak, akik rászorulnak.
+				</p>
+				<p class="mt-6 text-[1.125rem] font-semibold text-primary">
+					Köszönjük, hogy velünk tartasz!
+				</p>
+				<p class="mt-4 text-[1rem] text-primary">
+					Az alábbi űrlap kitöltésével lehetőséget adsz arra, hogy személyesen is köszönetet
+					mondhassunk.
+				</p>
+			</div>
+		</div>
+	</section>
+</Layout>
