@@ -1,18 +1,20 @@
 // @ts-check
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
-import { loadEnv } from 'vite';
 import node from '@astrojs/node';
 import tailwindcss from '@tailwindcss/vite';
-import sanity from '@sanity/astro';
 import react from '@astrojs/react';
 import emdash, { local } from 'emdash/astro';
 import { sqlite } from 'emdash/db';
 
-const { PUBLIC_SANITY_PROJECT_ID, PUBLIC_SANITY_DATASET } = loadEnv(
-  process.env.NODE_ENV ?? 'development',
-  process.cwd(),
-  ''
-);
+function bodyButtonPlugin() {
+	return {
+		id: 'body-button',
+		version: '1.0.0',
+		entrypoint: fileURLToPath(new URL('./src/plugins/body-button/plugin.ts', import.meta.url)),
+		componentsEntry: fileURLToPath(new URL('./src/plugins/body-button/components.ts', import.meta.url)),
+	};
+}
 
 // https://astro.build/config
 export default defineConfig({
@@ -22,13 +24,6 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   integrations: [
-    sanity({
-      projectId: PUBLIC_SANITY_PROJECT_ID,
-      dataset: PUBLIC_SANITY_DATASET,
-      useCdn: false,
-      apiVersion: '2026-09-29',
-      studioBasePath: '/studio',
-    }),
     react(),
     emdash({
       database: sqlite({ url: 'file:./data.db' }),
@@ -36,6 +31,7 @@ export default defineConfig({
         directory: './uploads',
         baseUrl: '/_emdash/api/media/file',
       }),
+      plugins: [bodyButtonPlugin()],
     }),
   ],
 });

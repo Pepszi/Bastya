@@ -1,0 +1,34 @@
+---
+import { sanitizeHref } from 'emdash';
+import Button from '../../components/Button.astro';
+
+interface ButtonNode {
+	text?: string;
+	url?: string;
+	variant?: string;
+	blank?: boolean;
+}
+
+const node = (Astro.props.node ?? {}) as ButtonNode;
+const label = typeof node.text === 'string' ? node.text.trim() : '';
+const href = sanitizeHref(typeof node.url === 'string' ? node.url : '');
+const variant =
+	node.variant === 'secondary-accent' || node.variant === 'secondary-white' ? node.variant : 'primary';
+const openInNewTab = node.blank === true;
+---
+
+{
+	label && href !== '#' && (
+		<div class="my-6">
+			<Button
+				href={href}
+				variant={variant}
+				class="event-body-button"
+				target={openInNewTab ? '_blank' : undefined}
+				rel={openInNewTab ? 'noopener noreferrer' : undefined}
+			>
+				{label}
+			</Button>
+		</div>
+	)
+}

@@ -95,7 +95,7 @@ const blockComponents = defineBlockComponents({
 		list-style: decimal;
 	}
 
-	.event-body :global(a) {
+	.event-body :global(a:not(.event-body-button)) {
 		color: var(--color-accent);
 		text-decoration: underline;
 	}

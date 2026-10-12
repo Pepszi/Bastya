@@ -5,6 +5,26 @@
 
 import type { BylineSummary, ContentBylineCredit, TaxonomyTerm, PortableTextBlock } from "emdash";
 
+export interface EventSectionsPhotoGalleryV1Block {
+  _type: "photo_gallery";
+  _version: 1;
+  _key: string;
+  "images"?: { "image": { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown>; darkVariant?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> } }; "caption"?: string | null }[] | null;
+}
+
+export type EventSectionsPhotoGalleryBlock = EventSectionsPhotoGalleryV1Block;
+
+export interface EventSectionsYoutubeGalleryV1Block {
+  _type: "youtube_gallery";
+  _version: 1;
+  _key: string;
+  "videos"?: { "url": string; "title"?: string | null }[] | null;
+}
+
+export type EventSectionsYoutubeGalleryBlock = EventSectionsYoutubeGalleryV1Block;
+
+export type EventSectionsBlock = EventSectionsPhotoGalleryBlock | EventSectionsYoutubeGalleryBlock;
+
 export interface Event {
   id: string;
   slug: string | null;
@@ -15,6 +35,37 @@ export interface Event {
   body?: PortableTextBlock[];
   start_date: string;
   end_date: string;
+  sections?: EventSectionsBlock[];
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  byline?: BylineSummary | null;
+  bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
+}
+
+export interface Page {
+  id: string;
+  slug: string | null;
+  status: string;
+  title: string;
+  content?: PortableTextBlock[];
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  byline?: BylineSummary | null;
+  bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
+}
+
+export interface Post {
+  id: string;
+  slug: string | null;
+  status: string;
+  title: string;
+  featured_image?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown>; darkVariant?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> } };
+  content?: PortableTextBlock[];
+  excerpt?: string;
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date | null;
@@ -26,5 +77,7 @@ export interface Event {
 declare module "emdash" {
   interface EmDashCollections {
     events: Event;
+    pages: Page;
+    posts: Post;
   }
 }
