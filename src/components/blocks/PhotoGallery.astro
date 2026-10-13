@@ -107,7 +107,10 @@ function mediaUrl(image: ImageValue): string {
 			<MediaLightbox label="Fotógaléria" />
 			<script>
 				import { initMediaLightboxes } from '../../scripts/media-lightbox';
-				initMediaLightboxes();
+
+				document.addEventListener('astro:page-load', () => {
+					initMediaLightboxes();
+				});
 			</script>
 		</div>
 	)

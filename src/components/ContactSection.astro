@@ -153,5 +153,8 @@ const fieldClass =
 
 <script>
 	import { initContactForm } from '../scripts/contact-form';
-	initContactForm();
+
+	document.addEventListener('astro:page-load', () => {
+		initContactForm();
+	});
 </script>

@@ -4,7 +4,8 @@ export function initHeroVideoModal() {
 	const modal = document.querySelector<HTMLDialogElement>('[data-video-modal]');
 	const closeBtn = document.querySelector<HTMLButtonElement>('[data-video-close]');
 	const frame = document.querySelector<HTMLIFrameElement>('[data-video-frame]');
-	if (!openBtn || !modal || !frame) return;
+	if (!openBtn || !modal || !frame || openBtn.dataset.videoReady === 'true') return;
+	openBtn.dataset.videoReady = 'true';
 
 	const videoSrc =
 		'https://www.youtube-nocookie.com/embed/xefdg-9LMuo?si=5yVAy6OpvQygYDQu&autoplay=1';

@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
@@ -17,13 +18,15 @@ const { title = 'Astro' } = Astro.props;
 		<link rel="icon" type="image/png" href="/global/favicon.png" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
-			rel="stylesheet"
+			rel="preload"
+			href="/fonts/Quicksand-VariableFont_wght.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
 		/>
 		<title>{title}</title>
+		<ClientRouter />
 		<slot name="head" />
 	</head>
 	<body class="bg-background text-primary font-sans">

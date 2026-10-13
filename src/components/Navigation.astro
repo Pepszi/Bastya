@@ -18,7 +18,7 @@ const simpleLinks = [
 ];
 ---
 
-<header class="sticky top-0 z-50 border-b border-border bg-background">
+<header class="sticky top-0 z-50 border-b border-border bg-background" transition:persist="site-header">
 	<nav
 		class="mx-auto flex max-w-[90rem] items-center justify-between gap-6 px-6 py-4"
 		aria-label="Fő navigáció"
@@ -122,7 +122,10 @@ const simpleLinks = [
 	!preview && (
 		<script>
 			import { initNavigation } from '../scripts/navigation';
-			initNavigation();
+
+			document.addEventListener('astro:page-load', () => {
+				initNavigation();
+			});
 		</script>
 	)
 }

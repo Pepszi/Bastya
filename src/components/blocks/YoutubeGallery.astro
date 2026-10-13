@@ -88,7 +88,10 @@ function readVideos(videos: unknown): Video[] {
 			<MediaLightbox label="YouTube videók" />
 			<script>
 				import { initMediaLightboxes } from '../../scripts/media-lightbox';
-				initMediaLightboxes();
+
+				document.addEventListener('astro:page-load', () => {
+					initMediaLightboxes();
+				});
 			</script>
 		</div>
 	)

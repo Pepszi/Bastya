@@ -33,6 +33,8 @@ function webpConvertPlugin() {
 export default defineConfig({
   output: 'server',
   adapter: node({ mode: 'standalone' }),
+  // ClientRouter enables prefetchAll by default; keep it off until we opt in explicitly.
+  prefetch: false,
   vite: {
     plugins: [tailwindcss()],
   },

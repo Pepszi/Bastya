@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+	font-family: "Quicksand";
+	src: url("/fonts/Quicksand-VariableFont_wght.woff2") format("woff2-variations");
+	font-weight: 300 700;
+	font-style: normal;
+	font-display: swap;
+}
+
 @theme {
 	--font-sans: "Quicksand", ui-sans-serif, system-ui, sans-serif;
 	--font-heading: "Quicksand", ui-sans-serif, system-ui, sans-serif;

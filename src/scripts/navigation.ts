@@ -1,7 +1,8 @@
 /** Initializes header mobile menu and mobile dropdown toggles. */
 export function initNavigation() {
 	const nav = document.querySelector<HTMLElement>('[data-nav]');
-	if (!nav) return;
+	if (!nav || nav.dataset.navReady === 'true') return;
+	nav.dataset.navReady = 'true';
 
 	const toggle = nav.querySelector<HTMLButtonElement>('[data-nav-toggle]');
 	const menu = nav.querySelector<HTMLElement>('[data-nav-menu]');

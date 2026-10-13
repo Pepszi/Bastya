@@ -73,7 +73,10 @@ const upcomingEvents = await loadEventCards(true);
 
 	<script>
 		import { initHeroVideoModal } from '../scripts/hero-video-modal';
-		initHeroVideoModal();
+
+		document.addEventListener('astro:page-load', () => {
+			initHeroVideoModal();
+		});
 	</script>
 
 	<section
