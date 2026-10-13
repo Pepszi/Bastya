@@ -1,6 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/Button.astro';
+import EventCard from '../components/EventCard.astro';
+import { loadEventCards } from '../scripts/events';
+
+const upcomingEvents = await loadEventCards(true);
 ---
 
 <Layout title="Bástya">
@@ -217,6 +221,23 @@ import Button from '../components/Button.astro';
 			</div>
 		</div>
 	</section>
+
+	{
+		upcomingEvents.length > 0 && (
+			<section class="bg-background py-20 max-md:py-14">
+				<div class="mx-auto max-w-[90rem] px-6">
+					<h2 class="text-primary">Közelgő események</h2>
+					<ul class="mt-10 grid grid-cols-3 gap-x-8 gap-y-12 max-lg:grid-cols-2 max-md:grid-cols-1">
+						{upcomingEvents.map((event) => (
+							<li>
+								<EventCard {...event} />
+							</li>
+						))}
+					</ul>
+				</div>
+			</section>
+		)
+	}
 
 	<section
 		class="bg-cover bg-center bg-no-repeat py-20 max-md:py-14"
