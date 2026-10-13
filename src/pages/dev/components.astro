@@ -6,9 +6,11 @@ import PhotoGallery from '../../components/blocks/PhotoGallery.astro';
 import YoutubeGallery from '../../components/blocks/YoutubeGallery.astro';
 import Footer from '../../components/Footer.astro';
 import Navigation from '../../components/Navigation.astro';
+import ContactSection from '../../components/ContactSection.astro';
 
 const catalog = [
 	{ id: 'button', label: 'Button' },
+	{ id: 'contact-section', label: 'Contact section' },
 	{ id: 'event-card', label: 'Event card' },
 	{ id: 'photo-gallery', label: 'Photo gallery' },
 	{ id: 'youtube-gallery', label: 'YouTube gallery' },
@@ -80,6 +82,20 @@ const catalog = [
 						</p>
 						<Button variant="secondary-white">Secondary white</Button>
 					</div>
+				</div>
+			</section>
+
+			<section id="contact-section" class="scroll-mt-8">
+				<div class="mb-6 flex flex-wrap items-baseline justify-between gap-2 border-b border-border pb-3">
+					<h2 class="text-h4 font-medium text-primary">Contact section</h2>
+					<code class="text-[0.75rem] text-secondary">src/components/ContactSection.astro</code>
+				</div>
+				<p class="mb-6 max-w-2xl text-[0.9375rem] text-secondary">
+					Kapcsolat page: FormSubmit form and the foundation contact details. Submitting this preview
+					sends a real email.
+				</p>
+				<div class="overflow-hidden rounded-[8px] border border-border">
+					<ContactSection heading="h2" />
 				</div>
 			</section>
 

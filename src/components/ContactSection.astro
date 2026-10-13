@@ -1,0 +1,158 @@
+---
+import Button from './Button.astro';
+
+interface Props {
+	heading?: 'h1' | 'h2';
+}
+
+const { heading: Heading = 'h1' } = Astro.props;
+
+const inbox = 'madacsi.peter.98@gmail.com';
+
+const fieldClass =
+	'mt-2 block w-full min-h-11 rounded-[6px] border border-primary bg-background px-3 text-[1rem] text-primary user-invalid:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent';
+---
+
+<section class="bg-background py-20 max-lg:py-16 max-md:py-12" aria-labelledby="kapcsolat-cim">
+	<div class="mx-auto max-w-[90rem] px-6">
+		<Heading id="kapcsolat-cim" class="text-primary">Kapcsolat</Heading>
+
+		<div class="mt-10 grid grid-cols-2 items-start gap-x-16 gap-y-12 max-lg:grid-cols-1">
+			<form
+				class="flex flex-col gap-5"
+				action={`https://formsubmit.co/ajax/${inbox}`}
+				method="POST"
+				data-contact-form
+				data-contact-endpoint={`https://formsubmit.co/ajax/${inbox}`}
+				aria-busy="false"
+				onsubmit="event.preventDefault()"
+			>
+				<input type="hidden" name="_subject" value="Üzenet a kapcsolat oldalról" />
+				<input type="hidden" name="_template" value="table" />
+				<input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" />
+
+				<div>
+					<label for="contact-name" class="block text-[0.875rem] font-semibold text-primary">Név</label>
+					<input
+						id="contact-name"
+						class={fieldClass}
+						type="text"
+						name="Név"
+						autocomplete="name"
+						required
+					/>
+				</div>
+
+				<div>
+					<label for="contact-email" class="block text-[0.875rem] font-semibold text-primary">Email</label>
+					<input
+						id="contact-email"
+						class={fieldClass}
+						type="email"
+						name="Email"
+						autocomplete="email"
+						required
+						data-contact-email
+					/>
+				</div>
+
+				<div>
+					<label for="contact-subject" class="block text-[0.875rem] font-semibold text-primary">Tárgy</label>
+					<input
+						id="contact-subject"
+						class={fieldClass}
+						type="text"
+						name="Tárgy"
+						required
+						data-contact-subject
+					/>
+				</div>
+
+				<div>
+					<label for="contact-message" class="block text-[0.875rem] font-semibold text-primary">Üzenet</label>
+					<textarea
+						id="contact-message"
+						class={`${fieldClass} min-h-[8rem] py-2`}
+						name="Üzenet"
+						rows="6"
+						required
+					></textarea>
+				</div>
+
+				<div class="flex items-start gap-3">
+					<input
+						id="contact-privacy"
+						class="mt-1 h-5 w-5 shrink-0 cursor-pointer accent-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+						type="checkbox"
+						name="Adatkezelési tájékoztató"
+						value="Elfogadva"
+						required
+					/>
+					<label for="contact-privacy" class="cursor-pointer text-[1rem] text-primary">
+						Elolvastam és elfogadom az&#8203;<a href="/adatkezelesi-tajekoztato" class="mx-1 underline underline-offset-2 hover:text-accent" target="_blank" rel="noopener noreferrer">Adatkezelési tájékoztatóban<span class="sr-only"> (új lapon nyílik)</span></a>&#8203;foglaltakat.
+					</label>
+				</div>
+
+				<p
+					data-contact-status
+					role="status"
+					aria-live="polite"
+					class="flex items-start gap-2 text-[1rem] font-semibold"
+					hidden
+				>
+					<svg
+						data-contact-status-icon
+						class="mt-0.5 hidden h-5 w-5 shrink-0"
+						viewBox="0 0 20 20"
+						fill="none"
+						aria-hidden="true"
+					>
+						<path
+							d="M4 10.5 8 14.5 16 6.5"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
+					</svg>
+					<span data-contact-status-text></span>
+				</p>
+
+				<Button type="submit" variant="primary" data-contact-submit>Küldés</Button>
+			</form>
+
+			<div class="text-[1rem] text-primary">
+				<p>
+					Töltse ki az űrlapot vagy küldjön e-mail üzenetet nekünk, melyet az alábbi e-mail címen is
+					megtehet, vagy hívjon bennünket az alább megadott telefonszámunkon.
+				</p>
+
+				<address class="mt-6 not-italic">
+					<p class="font-semibold">Bástya Terápiás Közösségi Alapítvány</p>
+					<p class="mt-1">2310 Szigetszentmiklós, Kálvin tér 3.</p>
+				</address>
+
+				<p class="mt-6 text-[0.875rem] font-semibold">Telefon</p>
+				<a
+					href="tel:+36202862300"
+					class="mt-1 inline-flex min-h-11 items-start underline-offset-2 hover:text-accent hover:underline"
+				>
+					+36 20 286 2300
+				</a>
+
+				<p class="mt-4 text-[0.875rem] font-semibold">Email</p>
+				<a
+					href="mailto:info@bastyaalapitvany.hu"
+					class="mt-1 inline-flex min-h-11 items-start break-words underline-offset-2 hover:text-accent hover:underline"
+				>
+					info@bastyaalapitvany.hu
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	import { initContactForm } from '../scripts/contact-form';
+	initContactForm();
+</script>
