@@ -17,7 +17,11 @@ const pageLinks = [
 
 const legalLinks = [
 	{ href: '/rolunk/beszamolok-palyazatok', label: 'Beszámolók, pályázatok' },
-	{ href: '#', label: 'Szervezeti és Működési Szabályzat' },
+	{
+		href: '/szmsz/SZMSZ_20260829_fin.pdf',
+		label: 'Szervezeti és Működési Szabályzat',
+		external: true,
+	},
 	{ href: '/afsz', label: 'ÁFSZ' },
 	{ href: '/adatkezelesi-tajekoztato', label: 'Adatkezelési tájékoztató' },
 	{ href: '/impresszum', label: 'Impresszum' },
@@ -123,6 +127,9 @@ const currentYear = new Date().getFullYear();
 									<a
 										href={link.href}
 										class="text-[0.9375rem] font-medium text-primary transition-colors hover:text-accent"
+										{...(link.external
+											? { target: '_blank', rel: 'noopener noreferrer' }
+											: {})}
 									>
 										{link.label}
 									</a>
