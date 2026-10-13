@@ -7,17 +7,21 @@ const { label } = Astro.props;
 ---
 
 <dialog
-	class="m-auto w-[min(92vw,72rem)] max-w-full border-0 bg-transparent p-0 backdrop:bg-primary/80"
+	class="fixed inset-0 m-0 h-dvh max-h-none w-full max-w-none items-center justify-center border-0 bg-primary p-0 backdrop:bg-transparent open:flex"
 	data-lightbox-dialog
 	aria-label={label}
 >
-	<div class="flex flex-col gap-3">
+	<div class="flex max-h-full w-[min(92vw,72rem)] flex-col items-center gap-3 px-14 py-10 sm:px-16">
 		<img
 			data-lightbox-image
 			alt=""
-			class="max-h-[80vh] w-full bg-primary object-contain"
+			class="max-h-[80vh] w-auto max-w-full object-contain"
 		/>
-		<div class="aspect-video w-full overflow-hidden bg-primary" data-lightbox-frame-wrap hidden>
+		<div
+			class="aspect-video w-full overflow-hidden bg-primary"
+			data-lightbox-frame-wrap
+			hidden
+		>
 			<iframe
 				data-lightbox-frame
 				class="h-full w-full"
@@ -28,28 +32,43 @@ const { label } = Astro.props;
 			></iframe>
 		</div>
 		<p class="text-[0.9375rem] text-background" data-lightbox-caption hidden></p>
-		<div class="flex flex-wrap items-center justify-between gap-3">
-			<button
-				type="button"
-				class="cursor-pointer rounded-[6px] bg-background px-3 py-2 text-[0.9375rem] font-medium text-primary"
-				data-lightbox-prev
-			>
-				Előző
-			</button>
-			<button
-				type="button"
-				class="cursor-pointer rounded-[6px] bg-background px-3 py-2 text-[0.9375rem] font-medium text-primary"
-				data-lightbox-close
-			>
-				Bezárás
-			</button>
-			<button
-				type="button"
-				class="cursor-pointer rounded-[6px] bg-background px-3 py-2 text-[0.9375rem] font-medium text-primary"
-				data-lightbox-next
-			>
-				Következő
-			</button>
-		</div>
+		<button
+			type="button"
+			class="cursor-pointer rounded-[6px] bg-background px-3 py-2 text-[0.9375rem] font-medium text-primary"
+			data-lightbox-close
+		>
+			Bezárás
+		</button>
 	</div>
+
+	<button
+		type="button"
+		class="absolute top-1/2 left-3 z-10 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-[6px] bg-background text-primary sm:left-5"
+		data-lightbox-prev
+		aria-label="Előző"
+	>
+		<svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+			<path
+				d="M12.5 4.5 7 10l5.5 5.5"
+				stroke="currentColor"
+				stroke-width="1.75"
+				stroke-linecap="round"
+				stroke-linejoin="round"></path>
+		</svg>
+	</button>
+	<button
+		type="button"
+		class="absolute top-1/2 right-3 z-10 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-[6px] bg-background text-primary sm:right-5"
+		data-lightbox-next
+		aria-label="Következő"
+	>
+		<svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+			<path
+				d="M7.5 4.5 13 10l-5.5 5.5"
+				stroke="currentColor"
+				stroke-width="1.75"
+				stroke-linecap="round"
+				stroke-linejoin="round"></path>
+		</svg>
+	</button>
 </dialog>
