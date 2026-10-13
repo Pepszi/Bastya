@@ -44,7 +44,7 @@ const blockComponents = defineBlockComponents({
 					image={event.image}
 					alt={event.imageAlt}
 					priority
-					class="aspect-[16/9] w-full object-cover"
+					class="h-auto w-full"
 					sizes="(min-width: 46rem) 46rem, 100vw"
 				/>
 			</div>
@@ -78,8 +78,10 @@ const blockComponents = defineBlockComponents({
 	}
 
 	.event-body :global(h2),
-	.event-body :global(h3) {
+	.event-body :global(h3),
+	.event-body :global(h4) {
 		margin-top: 1.75rem;
+		margin-bottom: 0.75rem;
 	}
 
 	.event-body :global(ul),
