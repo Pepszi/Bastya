@@ -11,12 +11,28 @@ export interface EventCardModel {
 	summary: string;
 	image: ImageValue;
 	imageAlt: string;
+	imageSrc?: string;
 }
 
 export interface EventDetailModel extends EventCardModel {
 	body: unknown;
 	sections: unknown;
 	upcoming: boolean;
+}
+
+function resolveMediaSrc(image: ImageValue): string | undefined {
+	const record = image as ImageValue & {
+		src?: string;
+		url?: string;
+		meta?: { storageKey?: string | null };
+	};
+	if (typeof record.src === 'string' && record.src) return record.src;
+	if (typeof record.url === 'string' && record.url) return record.url;
+	const storageKey = record.meta?.storageKey;
+	if (typeof storageKey === 'string' && storageKey) {
+		return `/_emdash/api/media/file/${storageKey}`;
+	}
+	return undefined;
 }
 
 function readEvent(id: string, data: object): Omit<EventDetailModel, 'upcoming'> | null {
@@ -35,6 +51,7 @@ function readEvent(id: string, data: object): Omit<EventDetailModel, 'upcoming'>
 		summary: record.summary,
 		image: imageValue,
 		imageAlt: imageValue.alt || record.title,
+		imageSrc: resolveMediaSrc(imageValue),
 		body: record.body,
 		sections: record.sections,
 	};

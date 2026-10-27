@@ -3,12 +3,53 @@ import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
+import {
+	SITE_BRAND,
+	SITE_CONTACT,
+	SITE_NAME,
+	SITE_URL,
+	absoluteUrl,
+	pageTitle as formatPageTitle,
+} from '../scripts/site';
 
 interface Props {
 	title?: string;
+	description?: string;
+	image?: string;
+	branded?: boolean;
+	noindex?: boolean;
+	ogType?: 'website' | 'article';
 }
 
-const { title = 'Astro' } = Astro.props;
+const {
+	title = SITE_BRAND,
+	description,
+	image,
+	branded = true,
+	noindex = false,
+	ogType = 'website',
+} = Astro.props;
+
+const fullTitle = formatPageTitle(title, branded);
+const canonical = absoluteUrl(Astro.url.pathname);
+const ogImage = image ? absoluteUrl(image) : undefined;
+const organizationSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'NGO',
+	name: SITE_NAME,
+	alternateName: SITE_BRAND,
+	url: SITE_URL,
+	logo: absoluteUrl('/global/logo.webp'),
+	email: SITE_CONTACT.email,
+	telephone: SITE_CONTACT.telephone,
+	address: {
+		'@type': 'PostalAddress',
+		streetAddress: SITE_CONTACT.streetAddress,
+		addressLocality: SITE_CONTACT.addressLocality,
+		postalCode: SITE_CONTACT.postalCode,
+		addressCountry: SITE_CONTACT.addressCountry,
+	},
+};
 ---
 
 <!doctype html>
@@ -25,7 +66,26 @@ const { title = 'Astro' } = Astro.props;
 			type="font/woff2"
 			crossorigin
 		/>
-		<title>{title}</title>
+		<title>{fullTitle}</title>
+		{description && <meta name="description" content={description} />}
+		{noindex && <meta name="robots" content="noindex, nofollow" />}
+		<link rel="canonical" href={canonical} />
+
+		<meta property="og:locale" content="hu_HU" />
+		<meta property="og:type" content={ogType} />
+		<meta property="og:site_name" content={SITE_NAME} />
+		<meta property="og:title" content={fullTitle} />
+		{description && <meta property="og:description" content={description} />}
+		<meta property="og:url" content={canonical} />
+		{ogImage && <meta property="og:image" content={ogImage} />}
+
+		<meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+		<meta name="twitter:title" content={fullTitle} />
+		{description && <meta name="twitter:description" content={description} />}
+		{ogImage && <meta name="twitter:image" content={ogImage} />}
+
+		<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+
 		<ClientRouter />
 		<slot name="head" />
 	</head>

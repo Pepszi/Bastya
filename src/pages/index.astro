@@ -3,11 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import Button from '../components/Button.astro';
 import EventCard from '../components/EventCard.astro';
 import { loadEventCards } from '../scripts/events';
+import { SITE_NAME, SITE_TAGLINE } from '../scripts/site';
 
 const upcomingEvents = await loadEventCards(true);
 ---
 
-<Layout title="Bástya">
+<Layout title={SITE_NAME} description={SITE_TAGLINE} branded={false}>
 	<section
 		class="relative flex h-[70vh] min-h-[25rem] items-end bg-cover bg-center bg-no-repeat"
 		style="background-image: url('/home/hero.webp')"

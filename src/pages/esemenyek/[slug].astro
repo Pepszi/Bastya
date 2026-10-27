@@ -18,9 +18,21 @@ const blockComponents = defineBlockComponents({
 	photo_gallery: PhotoGallery,
 	youtube_gallery: YoutubeGallery,
 });
+
+const eventDescription = event?.summary
+	? event.summary.length > 160
+		? `${event.summary.slice(0, 157).trimEnd()}…`
+		: event.summary
+	: 'Ez az esemény nem található.';
 ---
 
-<Layout title={event ? event.title : 'Esemény'}>
+<Layout
+	title={event ? event.title : 'Esemény'}
+	description={eventDescription}
+	image={event?.imageSrc}
+	ogType={event ? 'article' : 'website'}
+	noindex={!event}
+>
 	{
 		!event ? (
 			<section class="bg-background py-20 max-md:py-14">

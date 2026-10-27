@@ -31,6 +31,7 @@ function webpConvertPlugin() {
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://www.bastyaalapitvany.hu',
   output: 'server',
   adapter: node({ mode: 'standalone' }),
   // ClientRouter enables prefetchAll by default; keep it off until we opt in explicitly.

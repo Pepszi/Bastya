@@ -127,5 +127,6 @@ Prefer `localhost` over `127.0.0.1` for EmDash passkey / magic-link login.
 ### Notes
 
 - `data.db` and `uploads/` are created/used locally and are gitignored. They are needed for CMS content and media.
+- Public SEO URLs (canonical, Open Graph, sitemap, robots) use `https://www.bastyaalapitvany.hu` from `astro.config.mjs` / `src/scripts/site.ts`. Keep local EmDash login on `localhost`; do not point `EMDASH_SITE_URL` at production while developing.
 - Theme colors and fonts are defined in `src/styles/global.css` (Tailwind v4 `@theme`). Do not invent off-theme colors or alternate font families.
 - The component catalog at `/dev/components` should stay out of the main navigation; update it when adding or changing UI components.
