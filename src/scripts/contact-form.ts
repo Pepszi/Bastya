@@ -45,7 +45,7 @@ export function initContactForm() {
 		} catch {
 			showStatus(
 				status,
-				'Az üzenetet nem sikerült elküldeni. Próbálja újra, vagy írjon az info@bastyaalapitvany.hu címre.',
+				'Az üzenetet nem sikerült elküldeni. Próbáld újra, vagy írj az info@bastyaalapitvany.hu címre.',
 				true,
 			);
 		} finally {
