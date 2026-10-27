@@ -2,7 +2,9 @@
 
 import { getEmDashCollection, getEmDashEntry } from 'emdash';
 import type { ImageValue } from 'emdash';
+import { getSeoMeta } from 'emdash/seo';
 import { formatEventDates, isUpcoming, startOfTodayIso, toDate } from './event-dates';
+import { SITE_URL, absoluteUrl } from './site';
 
 export interface EventCardModel {
 	href: string;
@@ -14,10 +16,19 @@ export interface EventCardModel {
 	imageSrc?: string;
 }
 
+export interface EventSeoModel {
+	title: string;
+	description: string | null;
+	image?: string;
+	canonical: string | null;
+	noindex: boolean;
+}
+
 export interface EventDetailModel extends EventCardModel {
 	body: unknown;
 	sections: unknown;
 	upcoming: boolean;
+	seo: EventSeoModel;
 }
 
 function resolveMediaSrc(image: ImageValue): string | undefined {
@@ -35,7 +46,12 @@ function resolveMediaSrc(image: ImageValue): string | undefined {
 	return undefined;
 }
 
-function readEvent(id: string, data: object): Omit<EventDetailModel, 'upcoming'> | null {
+function truncateDescription(text: string, maxLength = 160): string {
+	if (text.length <= maxLength) return text;
+	return `${text.slice(0, maxLength - 3).trimEnd()}…`;
+}
+
+function readEvent(id: string, data: object): Omit<EventDetailModel, 'upcoming' | 'seo'> | null {
 	const record = data as Record<string, unknown>;
 	if (typeof record.title !== 'string' || typeof record.summary !== 'string') return null;
 	const start = toDate(record.start_date);
@@ -81,8 +97,24 @@ export async function loadEvent(slug: string): Promise<EventDetailModel | null> 
 	const event = readEvent(entry.id, entry.data);
 	if (!event) return null;
 	const end = toDate((entry.data as { end_date?: unknown }).end_date);
+	const pathSlug = entry.slug || entry.id;
+	const meta = getSeoMeta(entry, {
+		siteUrl: SITE_URL,
+		path: `/esemenyek/${pathSlug}`,
+		defaultTitle: event.title,
+		defaultDescription: truncateDescription(event.summary),
+		defaultOgImage: event.imageSrc ? absoluteUrl(event.imageSrc) : undefined,
+	});
+
 	return {
 		...event,
 		upcoming: end ? isUpcoming(end) : false,
+		seo: {
+			title: meta.ogTitle || event.title,
+			description: meta.description,
+			image: meta.ogImage ?? undefined,
+			canonical: meta.canonical,
+			noindex: Boolean(meta.robots),
+		},
 	};
 }

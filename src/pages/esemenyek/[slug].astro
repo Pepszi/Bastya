@@ -19,19 +19,16 @@ const blockComponents = defineBlockComponents({
 	youtube_gallery: YoutubeGallery,
 });
 
-const eventDescription = event?.summary
-	? event.summary.length > 160
-		? `${event.summary.slice(0, 157).trimEnd()}…`
-		: event.summary
-	: 'Ez az esemény nem található.';
+const fallbackDescription = 'Ez az esemény nem található.';
 ---
 
 <Layout
-	title={event ? event.title : 'Esemény'}
-	description={eventDescription}
-	image={event?.imageSrc}
+	title={event ? event.seo.title : 'Esemény'}
+	description={event ? event.seo.description ?? undefined : fallbackDescription}
+	image={event?.seo.image ?? event?.imageSrc}
+	canonical={event?.seo.canonical ?? undefined}
 	ogType={event ? 'article' : 'website'}
-	noindex={!event}
+	noindex={!event || Boolean(event.seo.noindex)}
 >
 	{
 		!event ? (

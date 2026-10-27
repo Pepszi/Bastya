@@ -16,6 +16,7 @@ interface Props {
 	title?: string;
 	description?: string;
 	image?: string;
+	canonical?: string;
 	branded?: boolean;
 	noindex?: boolean;
 	ogType?: 'website' | 'article';
@@ -25,13 +26,14 @@ const {
 	title = SITE_BRAND,
 	description,
 	image,
+	canonical: canonicalProp,
 	branded = true,
 	noindex = false,
 	ogType = 'website',
 } = Astro.props;
 
 const fullTitle = formatPageTitle(title, branded);
-const canonical = absoluteUrl(Astro.url.pathname);
+const canonical = canonicalProp ? absoluteUrl(canonicalProp) : absoluteUrl(Astro.url.pathname);
 const ogImage = image ? absoluteUrl(image) : undefined;
 const organizationSchema = {
 	'@context': 'https://schema.org',
