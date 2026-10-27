@@ -36,11 +36,11 @@ alwaysApply: true
 * **Modular Files:** Do **not** write monolithic `<script>` tags or massive single JS/TS files. Split logic into small, modular files organized logically in `src/scripts/` or alongside the component.
 * **Header Comment Required:** Every JS/TS file **must** start with a brief 1–2 line comment explaining its core purpose. Don't add comments to other file types.
 
-## Documentation Context
+## Documentation
 
-Consult these official Astro guides before generating complex logic:
-
-- Routing: https://docs.astro.build/en/guides/routing/
-- Astro Components: https://docs.astro.build/en/basics/astro-components/
-- Content Collections: https://docs.astro.build/en/guides/content-collections/
-- Styling & Tailwind: https://docs.astro.build/en/guides/styling/
+* **README tech stack:** Whenever you introduce a new tool, library, framework, host, or third-party service into the project (including new `package.json` dependencies and integrations wired in code), add it to the **Tech stack** list in `README.md` as `name — short use` (one brief phrase; no versions). Do not list transitive dependency packages.
+* Consult these official Astro guides before generating complex logic:
+  - Routing: https://docs.astro.build/en/guides/routing/
+  - Astro Components: https://docs.astro.build/en/basics/astro-components/
+  - Content Collections: https://docs.astro.build/en/guides/content-collections/
+  - Styling & Tailwind: https://docs.astro.build/en/guides/styling/

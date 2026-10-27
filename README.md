@@ -6,62 +6,21 @@ Content for events is managed in EmDash CMS; the rest of the marketing pages liv
 
 ## Tech stack
 
-### Core
-
-| Tool | Role |
-| --- | --- |
-| [Astro](https://astro.build) `^7` | Site framework (server-rendered) |
-| [TypeScript](https://www.typescriptlang.org) | Typed frontmatter, scripts, and plugins |
-| [Node.js](https://nodejs.org) `>=22.16.0` | Runtime (required by `package.json` engines) |
-| [@astrojs/node](https://docs.astro.build/en/guides/integrations-guide/node/) | Standalone Node adapter (`output: "server"`) |
-| [Vite](https://vite.dev) | Bundler (via Astro) |
-| [npm](https://www.npmjs.com) | Package manager (`package-lock.json`) |
-
-### CMS & data
-
-| Tool | Role |
-| --- | --- |
-| [EmDash](https://emdashcms.com) `^1.2` | Headless CMS (admin at `/_emdash/admin`, live content collections) |
-| SQLite (`data.db`) | EmDash database (local file; ignored by git) |
-| Local uploads (`uploads/`) | Media storage for EmDash (ignored by git) |
-
-### UI & styling
-
-| Tool | Role |
-| --- | --- |
-| [Tailwind CSS](https://tailwindcss.com) `v4` | Utility styling |
-| [@tailwindcss/vite](https://tailwindcss.com/docs/installation/using-vite) | Tailwind Vite plugin |
-| [Quicksand](https://fonts.google.com/specimen/Quicksand) | Self-hosted variable font (`public/fonts/`) |
-| Astro View Transitions (`ClientRouter`) | In-app page transitions |
-
-### React island support
-
-| Tool | Role |
-| --- | --- |
-| [React](https://react.dev) `^19` | Available for interactive islands |
-| [react-dom](https://react.dev) `^19` | React DOM renderer |
-| [@astrojs/react](https://docs.astro.build/en/guides/integrations-guide/react/) | Astro ↔ React integration |
-| `@types/react` / `@types/react-dom` | TypeScript types for React |
-
-### Media & tooling
-
-| Tool | Role |
-| --- | --- |
-| [Sharp](https://sharp.pixelplumbing.com) | Image processing / WebP conversion |
-| Custom EmDash plugins | `body-button` (inline CTA buttons in event bodies), `webp-convert` (upload → WebP) |
-| Custom storage adapter | `src/storage/webp-local.ts` (local media with WebP-aware serving) |
-| `scripts/convert-uploads-webp.mjs` | One-off script to convert existing uploads to WebP and sync DB rows |
-
-### Hosting & third-party services
-
-| Tool | Role |
-| --- | --- |
-| [Cloudflare Pages](https://pages.cloudflare.com) | Documented production hosting |
-| [Rackhost](https://www.rackhost.hu) | Domain / related hosting (listed in impresszum) |
-| [FormSubmit](https://formsubmit.co) | Contact form delivery |
-| [YouTube](https://www.youtube.com) (privacy-enhanced embeds) | Hero video and event video galleries |
-| [CookieYes](https://www.cookieyes.com) | Cookie consent (`cky-banner-element` in the footer) |
-| Stripe Payment Links | Used from CMS event content for workshop payments (where configured) |
+- [Astro](https://astro.build) — site framework
+- [TypeScript](https://www.typescriptlang.org) — typed app code
+- [Node.js](https://nodejs.org) — runtime
+- [EmDash](https://emdashcms.com) — CMS for events and media
+- [SQLite](https://www.sqlite.org) — EmDash database
+- [Tailwind CSS](https://tailwindcss.com) — styling
+- [React](https://react.dev) — interactive islands when needed
+- [Sharp](https://sharp.pixelplumbing.com) — image / WebP processing
+- [Cloudflare Pages](https://pages.cloudflare.com) — hosting
+- [Rackhost](https://www.rackhost.hu) — domain hosting
+- [FormSubmit](https://formsubmit.co) — contact form delivery
+- [YouTube](https://www.youtube.com) — video embeds
+- [CookieYes](https://www.cookieyes.com) — cookie consent
+- [Stripe](https://stripe.com) — payments
+- [Quicksand](https://fonts.google.com/specimen/Quicksand) — site font
 
 ## Project structure
 
