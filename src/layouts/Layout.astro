@@ -37,6 +37,7 @@ const canonical = canonicalProp ? absoluteUrl(canonicalProp) : absoluteUrl(Astro
 const ogImage = image ? absoluteUrl(image) : undefined;
 const organizationSchema = {
 	'@context': 'https://schema.org',
+	'@id': `${SITE_URL}/#organization`,
 	'@type': 'NGO',
 	name: SITE_NAME,
 	alternateName: SITE_BRAND,
