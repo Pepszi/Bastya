@@ -34,6 +34,10 @@ export default defineConfig({
   site: 'https://www.bastyaalapitvany.hu',
   output: 'server',
   adapter: node({ mode: 'standalone' }),
+  i18n: {
+    defaultLocale: 'hu',
+    locales: ['hu'],
+  },
   // ClientRouter enables prefetchAll by default; keep it off until we opt in explicitly.
   prefetch: false,
   vite: {

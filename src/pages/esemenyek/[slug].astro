@@ -13,6 +13,11 @@ if (!event) Astro.response.status = 404;
 const listHref = event?.upcoming ? '/esemenyek/jovobeli' : '/esemenyek/lezajlott';
 const listLabel = event?.upcoming ? 'Jövőbeli események' : 'Lezajlott események';
 const hasBody = Array.isArray(event?.body) && event.body.length > 0;
+const firstBodyBlock = hasBody ? (event.body as { children?: { text?: string }[] }[])[0] : undefined;
+const firstBodyText = Array.isArray(firstBodyBlock?.children)
+	? firstBodyBlock.children.map((span) => span.text ?? '').join('')
+	: '';
+const showSummary = Boolean(event?.summary) && event.summary !== firstBodyText;
 const sections = Array.isArray(event?.sections) ? event.sections : [];
 const blockComponents = defineBlockComponents({
 	photo_gallery: PhotoGallery,
@@ -57,10 +62,12 @@ const fallbackDescription = 'Ez az esemény nem található.';
 					sizes="(min-width: 46rem) 46rem, 100vw"
 				/>
 			</div>
-			<p class="mt-8 text-[1.125rem] leading-relaxed">{event.summary}</p>
+			{
+				showSummary && <p class="mt-8 text-[1.125rem] leading-relaxed">{event.summary}</p>
+			}
 			{
 				hasBody && (
-					<div class="event-body mt-6 text-[1.0625rem] leading-relaxed">
+					<div class:list={['event-body text-[1.0625rem] leading-relaxed', showSummary ? 'mt-6' : 'mt-8']}>
 						<PortableText value={event.body} />
 					</div>
 				)
@@ -104,6 +111,10 @@ const fallbackDescription = 'Ez az esemény nem található.';
 
 	.event-body :global(ol) {
 		list-style: decimal;
+	}
+
+	.event-body :global(strong) {
+		font-weight: 700;
 	}
 
 	.event-body :global(a:not(.event-body-button)) {

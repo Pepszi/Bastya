@@ -1,0 +1,186 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"meta": {
+		"name": "Bástya",
+		"description": "Hungarian-only CMS schema for Bástya Alapítvány"
+	},
+	"settings": {
+		"dateFormat": "yyyy. MMMM d.",
+		"tagline": "",
+		"timezone": "Europe/Budapest",
+		"title": "Bástya"
+	},
+	"blockTypes": [
+		{
+			"slug": "photo_gallery",
+			"label": "Fotógaléria",
+			"description": "Négyoszlopos képgaléria, a képek nagyítva nyílnak meg",
+			"icon": "images",
+			"category": "Média",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "images",
+							"label": "Képek",
+							"type": "repeater",
+							"validation": {
+								"maxItems": 48,
+								"subFields": [
+									{
+										"slug": "image",
+										"label": "Kép",
+										"type": "image",
+										"required": true
+									},
+									{
+										"slug": "caption",
+										"label": "Felirat",
+										"type": "string"
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "youtube_gallery",
+			"label": "YouTube videók",
+			"description": "Háromoszlopos videógaléria, a videók lejátszóban nyílnak meg",
+			"icon": "youtube-logo",
+			"category": "Média",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "videos",
+							"label": "Videók",
+							"type": "repeater",
+							"validation": {
+								"maxItems": 12,
+								"subFields": [
+									{
+										"slug": "url",
+										"label": "YouTube link",
+										"type": "url",
+										"required": true
+									},
+									{
+										"slug": "title",
+										"label": "Cím",
+										"type": "string"
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		}
+	],
+	"collections": [
+		{
+			"slug": "events",
+			"label": "Események",
+			"labelSingular": "Esemény",
+			"description": "Jövőbeli és lezajlott események",
+			"icon": "calendar-blank",
+			"admin": {
+				"listColumns": [
+					"start_date",
+					"end_date"
+				]
+			},
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"search",
+				"seo"
+			],
+			"urlPattern": "/esemenyek/{slug}",
+			"titleField": "title",
+			"dateField": "start_date",
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Cím",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "image",
+					"label": "Kép",
+					"type": "image",
+					"required": true
+				},
+				{
+					"slug": "summary",
+					"label": "Rövid leírás",
+					"type": "text",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "body",
+					"label": "Leírás",
+					"type": "portableText"
+				},
+				{
+					"slug": "start_date",
+					"label": "Kezdés",
+					"type": "datetime",
+					"required": true,
+					"indexed": true
+				},
+				{
+					"slug": "end_date",
+					"label": "Befejezés",
+					"type": "datetime",
+					"required": true,
+					"indexed": true
+				},
+				{
+					"slug": "sections",
+					"label": "Blokkok",
+					"type": "blocks",
+					"validation": {
+						"allowedTypes": [
+							"photo_gallery",
+							"youtube_gallery"
+						],
+						"retiredTypes": [],
+						"minItems": 0,
+						"maxItems": 20
+					}
+				}
+			]
+		}
+	],
+	"defaultLocale": "hu",
+	"taxonomies": [],
+	"menus": [],
+	"redirects": [
+		{
+			"source": "/esemenyek/kenyersutes-workshopp",
+			"destination": "/esemenyek/kenyersutes-workshop",
+			"type": 301,
+			"groupName": "Auto: slug change"
+		},
+		{
+			"source": "/esemenyek/fuggosegeink-tobb-mint-200-diakot-szolitott-meg-a-prevencios-szinhaz%2F",
+			"destination": "/esemenyek/fuggosegeink-tobb-mint-200-diakot-szolitott-meg-a-prevencios-szinhaz",
+			"type": 301,
+			"groupName": "Auto: slug change"
+		}
+	],
+	"widgetAreas": []
+}
